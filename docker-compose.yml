@@ -50,8 +50,6 @@ services:
       - JDBC_URL=${JDBC_URL}
       - JDBC_USERNAME=${JDBC_USERNAME}
       - JDBC_PASSWORD=${JDBC_PASSWORD}
-    links:
-      - "pinpoint-mysql:pinpoint-mysql"
 
   pinpoint-collector:
     container_name: "${PINPOINT_COLLECTOR_NAME}"
