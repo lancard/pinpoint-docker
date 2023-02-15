@@ -119,18 +119,6 @@ services:
       - FLINK_CLUSTER_ENABLE=${FLINK_CLUSTER_ENABLE}
       - FLINK_CLUSTER_ZOOKEEPER_ADDRESS=${FLINK_CLUSTER_ZOOKEEPER_ADDRESS}
 
-  pinpoint-quickstart:
-    container_name: "pinpoint-quickstart"
-    image: "pinpointdocker/pinpoint-quickstart"
-    ports:
-      - "${APP_PORT:-8085}:8080"
-    volumes:
-      - data-volume:/pinpoint-agent
-    environment:
-      JAVA_OPTS: "-javaagent:/pinpoint-agent/pinpoint-bootstrap-${PINPOINT_VERSION}.jar -Dpinpoint.agentId=${AGENT_ID} -Dpinpoint.applicationName=${APP_NAME} -Dpinpoint.profiler.profiles.active=${SPRING_PROFILES}"
-    depends_on:
-      - pinpoint-agent
-
   pinpoint-batch:
     container_name: "${PINPOINT_BATCH_NAME}"
     image: "pinpointdocker/pinpoint-batch:${PINPOINT_VERSION}"
