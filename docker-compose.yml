@@ -108,42 +108,5 @@ services:
       ZOO_MY_ID: 3
       ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=0.0.0.0:2888:3888
 
-  ##flink
-  jobmanager:
-    build:
-      context: pinpoint-flink
-      dockerfile: Dockerfile
-      args:
-        - PINPOINT_VERSION=${PINPOINT_VERSION}
-
-    container_name: "${PINPOINT_FLINK_NAME}-jobmanager"
-    image: "pinpointdocker/pinpoint-flink:${PINPOINT_VERSION}"
-    ports:
-      - "${FLINK_WEB_PORT:-8081}:8081"
-    command: standalone-job -p 1 pinpoint-flink-job.jar -spring.profiles.active release
-    environment:
-      - JOB_MANAGER_RPC_ADDRESS=jobmanager
-      - PINPOINT_ZOOKEEPER_ADDRESS=${PINPOINT_ZOOKEEPER_ADDRESS}
-    depends_on:
-      - zoo1
-
-  taskmanager:
-    build:
-      context: pinpoint-flink
-      dockerfile: Dockerfile
-      args:
-        - PINPOINT_VERSION=${PINPOINT_VERSION}
-
-    container_name: "${PINPOINT_FLINK_NAME}-taskmanager"
-    image: "pinpointdocker/pinpoint-flink:${PINPOINT_VERSION}"
-    depends_on:
-      - zoo1
-      - jobmanager
-    command: taskmanager
-    links:
-      - "jobmanager:jobmanager"
-    environment:
-      - JOB_MANAGER_RPC_ADDRESS=jobmanager
-
 volumes:
   hbase_data:
