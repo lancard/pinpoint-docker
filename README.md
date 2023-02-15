@@ -1,2 +1,4 @@
 # pinpoint-docker
-pinpoint APM docker
+Simple version of pinpoint APM docker
+
+# Just deploy!
