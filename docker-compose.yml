@@ -54,7 +54,7 @@ services:
   pinpoint-collector:
     container_name: "${PINPOINT_COLLECTOR_NAME}"
     image: "pinpointdocker/pinpoint-collector:${PINPOINT_VERSION}"
-
+    hostname: pinpoint-collector
     depends_on:
       - pinpoint-hbase
       - zoo1
