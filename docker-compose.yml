@@ -128,4 +128,5 @@ volumes:
 
 networks:
   default:
-    driver: bridge
+    external:
+      name: default_network
