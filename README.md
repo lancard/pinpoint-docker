@@ -2,4 +2,4 @@
 Simple version of pinpoint APM docker
 
 # Get started
-create 'default_network' and Just deploy!
+create 'pinpoint-network' and Just deploy!
